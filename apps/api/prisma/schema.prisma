@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -6,58 +9,58 @@ datasource db {
   provider = "sqlite"
 }
 
-model User {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String
-  bio       String?
-  avatar    String?
-  password  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  comments  Comment[]
-  likes     Like[]
-  posts     Post[]
+model User{
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  bio String?
+  avatar String?
+  password String? 
+  createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts Post[]
+  comments Comment[]
+  likes Like[]
 }
 
 model Post {
-  id        Int       @id @default(autoincrement())
-  slug      String?   @unique
-  title     String
-  content   String
+  id Int @id @default(autoincrement())
+  slug String? @unique
+  title String 
   thumbnail String?
+  content String
   published Boolean
-  authorId  Int
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  comments  Comment[]
-  likes     Like[]
-  author    User      @relation(fields: [authorId], references: [id])
-  tags      Tag[]     @relation("PostTags")
+  authorId Int
+  author User @relation(fields: [authorId], references: [id])
+  createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  comments Comment[]
+  tags Tag[] @relation("PostTags")
+  likes Like[]
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  content   String
-  postId    Int
-  authorId  Int
-  createdAt DateTime @default(now())
+  id Int @id @default(autoincrement())
+  content String
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
+  authorId Int
+  user User @relation(fields: [authorId], references: [id])
+  createAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  author    User     @relation(fields: [authorId], references: [id])
-  post      Post     @relation(fields: [postId], references: [id])
 }
 
 model Tag {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
+  id Int @id @default(autoincrement())
+  name String @unique
   posts Post[] @relation("PostTags")
 }
 
 model Like {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  postId    Int
-  createdAt DateTime @default(now())
-  post      Post     @relation(fields: [postId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
+  id Int @id @default(autoincrement())
+  userId Int
+  postId Int
+  createAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  post Post @relation(fields: [postId],references: [id])
 }
