@@ -10,15 +10,21 @@ import { UserModule } from './user/user.module';
 import { CommentModule } from './comment/comment.module';
 import { TagsModule } from './tags/tags.module';
 import { LikesModule } from './likes/likes.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     PrismaModule, 
     GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
-    autoSchemaFile: join(process.cwd(),"src/graphql/schema.gql")
+    autoSchemaFile: join(process.cwd(),"src/graphql/schema.gql"),
+    context: ({req}) => ({req})
   }), 
-  PostModule, UserModule, CommentModule, TagsModule, LikesModule
+  ConfigModule.forRoot({
+    isGlobal:true
+  }),
+  PostModule, UserModule, CommentModule, TagsModule, LikesModule, AuthModule
 ],
   controllers: [AppController],
   providers: [AppService],

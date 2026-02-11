@@ -9,9 +9,13 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
     "prettier": "^3.7.4",
+    "tailwindcss": "^4.1.18",
     "turbo": "^2.7.4",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "web": "^0.0.2"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
