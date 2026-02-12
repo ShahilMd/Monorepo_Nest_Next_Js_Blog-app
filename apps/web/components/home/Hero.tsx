@@ -10,7 +10,7 @@ function Hero() {
   return (
     <div>
         <h1 className={`flex items-center justify-center text-4xl md:text-6xl ${titanOne.className}`}>
-            BLOGS <span className='bg-transparent'>THAT</span> INSPIRE
+            BLOGS <span className='bg-transparent outline-text mx-3'>THAT</span> INSPIRE
         </h1>
     </div>
   )

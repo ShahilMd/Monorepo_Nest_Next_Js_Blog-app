@@ -3,8 +3,10 @@ import React from 'react'
 
 function Header() {
   return (
-    <div>
+    <div className='space-y-10'>
+      <div className='mt-20'>
         <Hero/>
+      </div>
     </div>
   )
 }
