@@ -1,7 +1,9 @@
+"use client"
+
 import Image from "next/image"
 import { ModeToggle } from "./ModeToggle"
-import { SearchBox } from "./SearchBox"
-import { Button } from "../ui/button"
+import { Button, buttonVariants } from "../ui/button"
+import {motion} from "motion/react"
 
 
 
@@ -10,16 +12,21 @@ function Navbar() {
     <div>
         <div className="flex items-center justify-between">
             <p>postra</p>
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
+              <motion.p className="px-2 py-1 rounded-lg">
+                Our story
+              </motion.p>
+              <p className="px-2 py-1 rounded-lg">
+                Blogs
+              </p>
 
-            <SearchBox/>
-            <ModeToggle/>
+          <Button variant={"default"}>
+            Get started
+           </Button>
            <Button variant={"ghost"}>
             login
            </Button>
-           <Button variant={"default"}>
-            Get started
-           </Button>
+           <ModeToggle/>
             </div>
         </div>
     </div>
